@@ -1,8 +1,13 @@
 package com.example.demo.dto;
 
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+
 public class UserCreateRequest {
 
+    @NotBlank
     private String name;
+    @Min(0)
     private int age;
 
     public String getName(){
