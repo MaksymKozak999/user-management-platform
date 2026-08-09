@@ -13,14 +13,11 @@
     @RequestMapping("/users")
     public class UserController {
 
-
         private final UserService userService;
-
 
         public UserController(UserService userService) {
             this.userService = userService;
         }
-
 
         @GetMapping
         public List<UserResponse> getUsers() {
@@ -39,7 +36,6 @@
             return userService.addUser(user);
         }
 
-
         @PutMapping("/{id}")
         public UserResponse updateUser(
                 @PathVariable Long id,
@@ -47,7 +43,6 @@
 
             return userService.updateUser(id,user);
         }
-
 
         @DeleteMapping("/{id}")
         public void deleteUser(@PathVariable Long id) {
