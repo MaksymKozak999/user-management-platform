@@ -6,6 +6,7 @@ import com.example.demo.exception.UserNotFoundException;
 import com.example.demo.model.User;
 import com.example.demo.repository.UserRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -18,6 +19,7 @@ public class UserService {
         this.repository = repository;
     }
 
+    @Transactional(readOnly = true)
     public List<UserResponse> getUsers() {
         List<User> users = repository.findAll();
 
@@ -27,6 +29,7 @@ public class UserService {
         return response;
     }
 
+    @Transactional
     public UserResponse addUser(UserCreateRequest request) {
 
         User user = new User();
@@ -42,6 +45,7 @@ public class UserService {
         return response;
     }
 
+    @Transactional(readOnly = true)
     public UserResponse getUserById(Long id) {
         User user = repository.findById(id).orElseThrow(() -> new UserNotFoundException(id));
 
@@ -50,6 +54,7 @@ public class UserService {
         return response;
     }
 
+    @Transactional
     public UserResponse updateUser(Long id, UserCreateRequest userCreate) {
 
         User user = repository.findById(id).orElseThrow(() -> new UserNotFoundException(id));
@@ -65,6 +70,7 @@ public class UserService {
         return response;
     }
 
+    @Transactional
     public void deleteUser(Long id) {
         if (repository.existsById(id))
             repository.deleteById(id);
