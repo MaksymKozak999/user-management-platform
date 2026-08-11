@@ -3,10 +3,9 @@
     import com.example.demo.dto.UserCreateRequest;
     import com.example.demo.dto.UserResponse;
     import com.example.demo.service.UserService;
-
     import jakarta.validation.Valid;
+    import org.springframework.http.HttpStatus;
     import org.springframework.web.bind.annotation.*;
-
     import java.util.List;
 
     @RestController
@@ -24,14 +23,13 @@
             return userService.getUsers();
         }
 
-
         @GetMapping("/{id}")
         public UserResponse getUser(@PathVariable Long id) {
             return userService.getUserById(id);
         }
 
-
         @PostMapping
+        @ResponseStatus(HttpStatus.CREATED)
         public UserResponse addUser(@RequestBody @Valid UserCreateRequest user) {
             return userService.addUser(user);
         }
