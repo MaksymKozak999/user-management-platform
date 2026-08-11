@@ -4,9 +4,13 @@
     import com.example.demo.dto.UserResponse;
     import com.example.demo.service.UserService;
     import jakarta.validation.Valid;
+    import org.springframework.data.domain.Page;
     import org.springframework.http.HttpStatus;
     import org.springframework.web.bind.annotation.*;
-    import java.util.List;
+    import org.springframework.data.domain.Page;
+    import org.springframework.data.domain.Pageable;
+
+
 
     @RestController
     @RequestMapping("/users")
@@ -19,8 +23,8 @@
         }
 
         @GetMapping
-        public List<UserResponse> getUsers() {
-            return userService.getUsers();
+        public Page<UserResponse> getUsers(Pageable pageable){
+            return userService.getUsers(pageable);
         }
 
         @GetMapping("/{id}")

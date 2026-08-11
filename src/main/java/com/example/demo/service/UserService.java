@@ -5,6 +5,8 @@ import com.example.demo.dto.UserResponse;
 import com.example.demo.exception.UserNotFoundException;
 import com.example.demo.model.User;
 import com.example.demo.repository.UserRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,13 +21,21 @@ public class UserService {
         this.repository = repository;
     }
 
+//    @Transactional(readOnly = true)
+//    public List<UserResponse> getUsers() {
+//        List<User> users = repository.findAll();
+//
+//        List<UserResponse> response = users.stream()
+//                .map(user -> new UserResponse(user.getId(), user.getName(), user.getAge(),user.getEmail()))
+//                .toList();
+//        return response;
+//    }
     @Transactional(readOnly = true)
-    public List<UserResponse> getUsers() {
-        List<User> users = repository.findAll();
+    public Page<UserResponse> getUsers(Pageable pageable) {
+        Page<User> users = repository.findAll(pageable);
 
-        List<UserResponse> response = users.stream()
-                .map(user -> new UserResponse(user.getId(), user.getName(), user.getAge(),user.getEmail()))
-                .toList();
+        Page<UserResponse> response = users.map(user ->
+                new UserResponse(user.getId(),user.getName(),user.getAge(),user.getEmail()));
         return response;
     }
 
