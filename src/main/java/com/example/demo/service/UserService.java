@@ -22,7 +22,7 @@ public class UserService {
         List<User> users = repository.findAll();
 
         List<UserResponse> response = users.stream()
-                .map(user -> new UserResponse(user.getId(), user.getName(), user.getAge()))
+                .map(user -> new UserResponse(user.getId(), user.getName(), user.getAge(),user.getEmail()))
                 .toList();
         return response;
     }
@@ -33,10 +33,11 @@ public class UserService {
 
         user.setAge(request.getAge());
         user.setName(request.getName());
+        user.setEmail(request.getEmail());
 
         User saved = repository.save(user);
 
-        UserResponse response = new UserResponse(saved.getId(), saved.getName(), saved.getAge());
+        UserResponse response = new UserResponse(saved.getId(), saved.getName(), saved.getAge(),saved.getEmail());
 
         return response;
     }
@@ -44,7 +45,7 @@ public class UserService {
     public UserResponse getUserById(Long id) {
         User user = repository.findById(id).orElseThrow(() -> new UserNotFoundException(id));
 
-        UserResponse response = new UserResponse(user.getId(), user.getName(), user.getAge());
+        UserResponse response = new UserResponse(user.getId(), user.getName(), user.getAge(),user.getEmail());
 
         return response;
     }
@@ -55,10 +56,11 @@ public class UserService {
 
         user.setName(userCreate.getName());
         user.setAge(userCreate.getAge());
+        user.setEmail(userCreate.getEmail());
 
         User saved = repository.save(user);
 
-        UserResponse response = new UserResponse(saved.getId(), saved.getName(), saved.getAge());
+        UserResponse response = new UserResponse(saved.getId(), saved.getName(), saved.getAge(),saved.getEmail());
 
         return response;
     }
