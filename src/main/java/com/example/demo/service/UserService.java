@@ -21,15 +21,6 @@ public class UserService {
         this.repository = repository;
     }
 
-//    @Transactional(readOnly = true)
-//    public List<UserResponse> getUsers() {
-//        List<User> users = repository.findAll();
-//
-//        List<UserResponse> response = users.stream()
-//                .map(user -> new UserResponse(user.getId(), user.getName(), user.getAge(),user.getEmail()))
-//                .toList();
-//        return response;
-//    }
     @Transactional(readOnly = true)
     public Page<UserResponse> getUsers(Pageable pageable) {
         Page<User> users = repository.findAll(pageable);
