@@ -64,9 +64,13 @@ class UserServiceTest {
 
         UserResponse result = userService.addUser(request);
 
-        assertEquals("Test", result.getName());
-        assertEquals(15, result.getAge());
-        assertEquals("test@gmail.com", result.getEmail());
+//        assertEquals("Test", result.getName());
+//        assertEquals(15, result.getAge());
+//        assertEquals("test@gmail.com", result.getEmail());
+
+        assertEquals(user.getName(), result.getName());
+        assertEquals(user.getAge(), result.getAge());
+        assertEquals(user.getEmail(), result.getEmail());
     }
 
 }

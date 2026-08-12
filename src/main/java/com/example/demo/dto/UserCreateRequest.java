@@ -14,13 +14,17 @@ public class UserCreateRequest {
     @Email
     private String email;
 
+    @NotBlank
+    private String password;
+
     public String getName(){
-        return this.name;
+        return name;
     }
-    public String getEmail(){return  this.email;}
+    public String getEmail(){return email;}
     public int getAge(){
-        return this.age;
+        return age;
     }
+    public  String getPassword(){return password;}
 
     public void setName(String name){
         this.name = name;
@@ -29,11 +33,13 @@ public class UserCreateRequest {
         this.age = age;
     }
     public void  setEmail(String email){this.email = email;}
+    public void setPassword(String password){this.password = password;}
 
     public UserCreateRequest(){}
-    public UserCreateRequest(String name,int age,String email){
+    public UserCreateRequest(String name,int age,String email,String password){
         this.age = age;
         this.name = name;
         this.email = email;
+        this.password = password;
     }
 }
